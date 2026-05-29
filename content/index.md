@@ -2,11 +2,11 @@
 title: Shiv Shah
 ---
 
-I'm interested in economics, quantitative methods, and finance. This site collects a small selection of my projects and writing.
+I'm interested in GTM systems, quantitative methods, and investing. This site collects a small selection of my projects and writing.
 
 [Contact](mailto:shivgudka@gmail.com)
 
-> *Selected projects and essays — some polished, some not.*
+> *Active portfolio / scratchpad*
 
 ## Projects
 

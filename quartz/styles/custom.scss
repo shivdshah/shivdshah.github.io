@@ -295,6 +295,11 @@
   margin-bottom: 0.5rem;
 }
 
+// ── Hide content-meta (date/read-time) on homepage only ─────────────────────
+body[data-slug="index"] .content-meta {
+  display: none;
+}
+
 // ── Responsive ────────────────────────────────────────────────────────────────
 @media (max-width: 560px) {
   .stat-grid { grid-template-columns: 1fr 1fr; }
