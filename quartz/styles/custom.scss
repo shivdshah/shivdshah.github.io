@@ -269,6 +269,32 @@
   font-weight: 700;
 }
 
+// ── Featured project card ────────────────────────────────────────────────────
+.featured-project-card {
+  border: 1px solid var(--lightgray);
+  border-left: 3px solid var(--secondary);
+  border-radius: 4px;
+  padding: 1.1rem 1.25rem;
+  margin: 1rem 0 1.5rem;
+  background: var(--light);
+}
+.featured-project-card p {
+  margin: 0.3rem 0;
+  line-height: 1.65;
+}
+.featured-project-card a {
+  color: var(--dark);
+}
+.featured-project-label {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--secondary);
+  margin-bottom: 0.5rem;
+}
+
 // ── Responsive ────────────────────────────────────────────────────────────────
 @media (max-width: 560px) {
   .stat-grid { grid-template-columns: 1fr 1fr; }

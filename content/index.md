@@ -10,10 +10,11 @@ I'm interested in economics, quantitative methods, and finance. This site collec
 
 ## Projects
 
-**[[projects/portfolio-risk-modelling|Forecasting Portfolio Risk Using GARCH and Value-at-Risk]]**
-*Risk Management & Modelling · R · GARCH · VaR*
-
-A quantitative analysis of six large-cap US stocks across a ten-year window. Uses PCA and GARCH modelling to estimate conditional volatility, then backtests a parametric VaR forecast against historical data.
+<div class="featured-project-card">
+<span class="featured-project-label">Featured</span>
+<p><strong><a href="/projects/portfolio-risk-modelling">Forecasting Portfolio Risk Using GARCH and Value-at-Risk</a></strong><br><em>Risk Management & Modelling · R · GARCH · VaR</em></p>
+<p>A quantitative analysis of six large-cap US stocks across a ten-year window. Uses PCA and GARCH modelling to estimate conditional volatility, then backtests a parametric VaR forecast against historical data.</p>
+</div>
 
 - [[projects/macro-growth-accounting|Growth Accounting and TFP Analysis: Portugal and Ethiopia]]
 - [[projects/lockdown-mental-health|Do Lockdowns Damage Mental Health? Evidence from Turkey's Age-Specific Curfews]]
