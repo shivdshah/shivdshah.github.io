@@ -18,6 +18,7 @@ I'm interested in GTM systems, quantitative methods, and investing. This site co
 
 - [[projects/macro-growth-accounting|Growth Accounting and TFP Analysis: Portugal and Ethiopia]]
 - [[projects/lockdown-mental-health|Do Lockdowns Damage Mental Health? Evidence from Turkey's Age-Specific Curfews]]
+- [[projects/flight-radar|What's Flying Over You Right Now?]] — Live overhead aircraft tracker using ADS-B telemetry.
 
 ## Writing
 
