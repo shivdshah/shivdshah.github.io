@@ -100,6 +100,78 @@ Barometric altitude is used rather than GPS geometric altitude because it is wha
 
 <script>
 (function () {
+  // ── ICAO airline prefix (first 3 chars of callsign) → airline name ─────────
+  var FR_AIRLINES = {
+    AAL:'American Airlines', AAR:'Asiana Airlines', ACA:'Air Canada', ADH:'Air One',
+    AEA:'Air Europa', AEE:'Aegean Airlines', AFR:'Air France', AHY:'Azerbaijan Airlines',
+    AIB:'Air Berlin', AIC:'Air India', AKL:'Air Kilroe', ALK:'SriLankan Airlines',
+    AMC:'Air Malta', AME:'Air Memphis', AMF:'Ameriquest Airlines', AMH:'Air Mauritanie',
+    AMU:'Air Macau', AMX:'Aeromexico', ANA:'All Nippon Airways', ANZ:'Air New Zealand',
+    APF:'Air Philippines', ARA:'Arik Air', ARE:'ASKY Airlines', ARI:'Air Serbia',
+    ARN:'Aeronaves TSM', ATN:'Air Transport International', AUA:'Austrian Airlines',
+    AVA:'Avianca', AXM:'AirAsia', AZA:'Alitalia', AZU:'Azul Airlines',
+    BAW:'British Airways', BCS:'European Air Transport', BEE:'Flybe', BEL:'Brussels Airlines',
+    BER:'Air Berlin', BMA:'British Midland', BPA:'Blue Panorama', BTI:'airBaltic',
+    BWA:'Caribbean Airlines', CAI:'Corendon Airlines', CAL:'China Airlines',
+    CCA:'Air China', CDG:'Shandong Airlines', CES:'China Eastern Airlines',
+    CFG:'Condor', CHH:'Hainan Airlines', CKS:'Kalitta Air', CLH:'Lufthansa CityLine',
+    CMP:'Copa Airlines', CNW:'Continental Micronesia', CSC:'Sichuan Airlines',
+    CSH:'Shanghai Airlines', CSN:'China Southern Airlines', CSZ:'Shenzhen Airlines',
+    CTN:'Croatia Airlines', CXA:'Xiamen Airlines', CXI:'SATA Air Açores',
+    CYP:'Cyprus Airways', DAH:'Air Algérie', DAL:'Delta Air Lines',
+    DAN:'Maersk Air', DLH:'Lufthansa', DLR:'Air Dolomiti',
+    DSM:'Donbassaero', EAL:'Eastern Air Lines', EIN:'Aer Lingus',
+    ELY:'El Al', ETE:'Ethiopian Airlines', ETD:'Etihad Airways',
+    EXS:'Jet2', EZS:'easyJet Switzerland', EZY:'easyJet', FBU:'Flybus',
+    FDX:'FedEx Express', FIN:'Finnair', FPO:'First Air', FUA:'Futura International Airways',
+    GAO:'Garuda Indonesia', GEC:'Lufthansa Cargo', GFA:'Gulf Air',
+    GIA:'Garuda Indonesia', GLO:'Gol Linhas Aéreas', GTI:'Atlas Air',
+    HAL:'Hawaiian Airlines', HDA:'Dragonair', HHN:'Hahn Air', HVN:'Vietnam Airlines',
+    IAW:'Iraqi Airways', IBE:'Iberia', ICE:'Icelandair', IGO:'IndiGo',
+    IRA:'Iran Air', IRK:'Kish Air', ISS:'Meridiana', ITY:'ITA Airways',
+    JAA:'Japan Asia Airways', JAI:'IndiGo', JAL:'Japan Airlines',
+    JAT:'Air Serbia', JBU:'JetBlue', JKK:'Spanair', JSX:'JSX',
+    KAL:'Korean Air', KAC:'Kuwait Airways', KLM:'KLM Royal Dutch Airlines',
+    KQA:'Kenya Airways', KZR:'Air Astana', LAM:'LAM Mozambique Airlines',
+    LAN:'LATAM Airlines', LAP:'LATAM Paraguay', LAO:'Lao Airlines',
+    LDA:'Lauda', LGL:'Luxair', LHA:'Lufthansa', LOT:'LOT Polish Airlines',
+    LRC:'LACSA', LSI:'Sky Airlines (Turkey)', LTU:'LTU International',
+    MAH:'Malév Hungarian Airlines', MAU:'Air Mauritius', MAX:'Norwegian Air International',
+    MAS:'Malaysia Airlines', MAY:'Malindo Air', MGL:'MIAT Mongolian Airlines',
+    MHV:'MVair', MLD:'Air Moldova', MSR:'EgyptAir', MXD:'MaxAir',
+    NAX:'Norwegian Air Shuttle', NCA:'Nippon Cargo Airlines', NKS:'Spirit Airlines',
+    NLY:'Niki', NOZ:'Norwegian Air Sweden', NPT:'Nok Air',
+    OAL:'Olympic Air', OMA:'Oman Air', OAW:'Helvetic Airways',
+    PAC:'Polar Air Cargo', PAL:'Philippine Airlines', PAO:'Polynesian Airlines',
+    PGA:'TAP Air Portugal', PKC:'Pakistan International Airlines', PLM:'Palma de Mallorca',
+    QFA:'Qantas', QNA:'Swiftair', QNK:'Blue Islands', QTR:'Qatar Airways',
+    RAM:'Royal Air Maroc', ROT:'TAROM', RUK:'Rwandair', RWD:'Air Rwanda',
+    RYR:'Ryanair', SAA:'South African Airways', SAB:'Sabena',
+    SAS:'Scandinavian Airlines', SAT:'SATA International', SBI:'S7 Airlines',
+    SEY:'Air Seychelles', SHT:'British Airways (Shuttle)', SIA:'Singapore Airlines',
+    SLM:'Surinam Airways', SNG:'SpiceJet', SOO:'Southern Air',
+    SUD:'Sudan Airways', SVA:'Saudia', SWA:'Southwest Airlines',
+    SWR:'Swiss International Air Lines', SXS:'Sun Express', SYR:'Syrian Air',
+    TAM:'LATAM Brasil', TAP:'TAP Air Portugal', TAR:'Tunisair',
+    THA:'Thai Airways', THT:'Air Tahiti Nui', THY:'Turkish Airlines',
+    TOM:'TUI Airways', TRA:'Transavia', TUI:'TUI fly',
+    TVF:'Transavia France', TWI:'Tailwind Airlines', TXI:'Texair',
+    UAE:'Emirates', UAL:'United Airlines', UBD:'Wasaya Airways',
+    UCA:'US Airways', UIA:'Ukraine International Airlines', UPS:'UPS Airlines',
+    USA:'US Airways', VDA:'Volga-Dnepr Airlines', VIR:'Virgin Atlantic',
+    VJC:'VietJet Air', VKG:'Thomas Cook Airlines Scandinavia', VLG:'Vueling',
+    VOE:'Volotea', VOZ:'Virgin Australia', VRD:'Virgin America',
+    VVB:'Viva Air', WDL:'WDL Aviation', WES:'West Air',
+    WIF:'Wideroe', WJA:'WestJet', WOA:'World Airways',
+    WZZ:'Wizz Air', XAX:'Xtra Airways', YZR:'Air Inuit',
+  };
+
+  function frAirlineName(callsign) {
+    if (!callsign || callsign.length < 3) return null;
+    var prefix = callsign.substring(0, 3).toUpperCase();
+    return FR_AIRLINES[prefix] || null;
+  }
+
   // ── ICAO type code → readable aircraft name ────────────────────────────────
   var FR_TYPES = {
     A318:'Airbus A318', A319:'Airbus A319', A320:'Airbus A320', A321:'Airbus A321',
@@ -190,6 +262,9 @@ Barometric altitude is used rather than GPS geometric altitude because it is wha
     var routeStr;
     if (d.origin === '???' && d.dest === '???') {
       routeStr = '<em style="color:var(--gray)">Route unavailable</em>';
+    } else if (d.origin === '???' || d.dest === '???') {
+      var known = d.origin !== '???' ? (d.originName ? d.originName + ' (' + d.origin + ')' : d.origin) : (d.destName ? d.destName + ' (' + d.dest + ')' : d.dest);
+      routeStr = '<em style="color:var(--gray)">' + (d.origin !== '???' ? known + '  →  ?' : '?  →  ' + known) + '</em>';
     } else {
       var o    = d.originName ? d.originName + ' (' + d.origin + ')' : d.origin;
       var dest = d.destName   ? d.destName   + ' (' + d.dest   + ')' : d.dest;
@@ -311,7 +386,7 @@ Barometric altitude is used rather than GPS geometric altitude because it is wha
       // ADSB.fi: alt_baro in feet, gs in knots, baro_rate in ft/min
       frRender({
         callsign:      callsign,
-        airline:       (route && route.airline && route.airline.name) || 'Unknown',
+        airline:       (route && route.airline && route.airline.name) || frAirlineName(callsign) || 'Unknown',
         origin:        (route && route.origin      && route.origin.iata_code)           || '???',
         originName:    (route && route.origin      && route.origin.name)                || '',
         dest:          (route && route.destination && route.destination.iata_code)      || '???',
