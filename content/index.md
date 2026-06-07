@@ -20,6 +20,7 @@ I work on GTM systems, quantitative methods, and investing. This site has a sele
 - [[projects/lockdown-mental-health|Do Lockdowns Damage Mental Health? Evidence from Turkey's Age-Specific Curfews]] — Replication and extension of Altındağ et al. (2022), using Turkey's age-based COVID curfews as a natural experiment to estimate the causal effect on mental health.
 - [[projects/corporate-jet-tracker|Corporate Jet Tracker]]: Private aviation as alternative data. Live watchlist of PE/hedge fund and executive aircraft; flags anomalous activity preceding M&A.
 - [[projects/flight-radar|What's Flying Over You Right Now?]]: Live overhead aircraft tracker using ADS-B telemetry.
+- [[projects/gita-verse-finder|Gita Verse Finder]]: Select a theme — duty, grief, love, anger, impermanence — and receive a verse from the Bhagavad Gita.
 
 ## Writing
 
