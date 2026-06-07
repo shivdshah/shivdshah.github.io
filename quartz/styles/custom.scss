@@ -476,6 +476,13 @@ body[data-slug="index"] .content-meta {
 }
 .flight-locate-btn:hover { color: var(--tertiary); }
 
+// ── Leaflet popup override (corporate jet tracker) ───────────────────────────
+.leaflet-popup-content-wrapper {
+  border-radius: 4px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15) !important;
+}
+.leaflet-popup-content { margin: 0.65rem 0.85rem !important; }
+
 // ── Responsive ────────────────────────────────────────────────────────────────
 @media (max-width: 560px) {
   .stat-grid { grid-template-columns: 1fr 1fr; }
