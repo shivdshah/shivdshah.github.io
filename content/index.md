@@ -2,7 +2,7 @@
 title: Shiv Shah
 ---
 
-I'm interested in GTM systems, quantitative methods, and investing. This site collects a small selection of my projects and writing.
+I work on GTM systems, quantitative methods, and investing. This site has a selection of my projects and writing.
 
 [Contact](mailto:shivgudka@gmail.com)
 
@@ -18,10 +18,10 @@ I'm interested in GTM systems, quantitative methods, and investing. This site co
 
 - [[projects/macro-growth-accounting|Growth Accounting and TFP Analysis: Portugal and Ethiopia]]
 - [[projects/lockdown-mental-health|Do Lockdowns Damage Mental Health? Evidence from Turkey's Age-Specific Curfews]]
-- [[projects/corporate-jet-tracker|Corporate Jet Tracker]] — Private aviation as alternative data. Live watchlist of PE/hedge fund and executive aircraft; flags anomalous activity preceding M&A.
-- [[projects/flight-radar|What's Flying Over You Right Now?]] — Live overhead aircraft tracker using ADS-B telemetry.
+- [[projects/corporate-jet-tracker|Corporate Jet Tracker]]: Private aviation as alternative data. Live watchlist of PE/hedge fund and executive aircraft; flags anomalous activity preceding M&A.
+- [[projects/flight-radar|What's Flying Over You Right Now?]]: Live overhead aircraft tracker using ADS-B telemetry.
 
 ## Writing
 
-- [[writing/ipl-monopsony|Cricket's Missing Billion]] — The IPL's structural monopsony and the $281m per season that should flow to players.
-- [[writing/b2b-marketplace|What I learned scaling a B2B marketplace from zero to $50m GMV]] — On supply constraints, commercial hiring, and the limits of disintermediation.
+- [[writing/ipl-monopsony|Cricket's Missing Billion]]: The IPL's structural monopsony and the $281m per season that should flow to players.
+- [[writing/b2b-marketplace|What I learned scaling a B2B marketplace from zero to $50m GMV]]: On supply constraints, commercial hiring, and the limits of disintermediation.

@@ -1,21 +1,21 @@
 ---
-title: Corporate Jet Tracker — Private Aviation as Alternative Data
+title: "Corporate Jet Tracker: Private Aviation as Alternative Data"
 tags:
   - javascript
   - aviation
   - finance
   - adsb
   - alternative-data
-description: Live tracker of 95 corporate and institutional aircraft identified from the FAA registry. The thesis — unusual private jet movements by executives and fund principals precede M&A announcements and earnings surprises, and this is derivable entirely from public ADS-B telemetry.
+description: Live tracker of 95 corporate aircraft identified from the FAA registry. Unusual private jet movements by executives and fund principals precede M&A announcements and earnings surprises. All data derives from public ADS-B telemetry.
 ---
 
 <div class="abstract">
-<p>Private jet movements by executives and institutional principals are a leading indicator for M&A activity and earnings events. This tracker monitors <strong>95 aircraft identified from the FAA civil registry</strong> in real time using public ADS-B telemetry — and flags live convergence signals: multiple tracked jets from different operators appearing within 200 km of each other at a non-hub location. Watchlist sourced from the FAA ReleasableAircraft database; no tail numbers are guessed or fabricated.</p>
+<p>Private jet movements by executives and institutional principals lead M&A activity and earnings events. This tracker monitors 95 aircraft identified from the FAA civil registry in real time using public ADS-B telemetry, and flags live convergence signals: multiple tracked jets from different operators appearing within 200 km of each other at a non-hub location. The watchlist comes from the FAA ReleasableAircraft database. No tail numbers are guessed or fabricated.</p>
 </div>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
-<span class="section-number">01 — Live Tracker</span>
+<span class="section-number">01: Live Tracker</span>
 
 ## Corporate Aircraft Monitor
 
@@ -32,64 +32,67 @@ description: Live tracker of 95 corporate and institutional aircraft identified 
 <div id="cjet-anomalies"></div>
 <div id="cjet-table"></div>
 
-<span class="section-number">02 — The Thesis</span>
+<span class="section-number">02: The Thesis</span>
 
 ## Private Jet Movements as a Leading Indicator
 
-The deal-making process generates a predictable physical footprint before any public announcement. Due diligence requires in-person meetings. Management presentations happen at neutral locations. Lawyers, bankers, and principals fly to target headquarters weeks before a transaction is filed. This pattern repeats across deal types:
+Every major deal generates a physical record before any public announcement. Due diligence requires in-person meetings. Management presentations happen at neutral locations. Lawyers, bankers, and principals fly to target headquarters weeks before a transaction is filed. This pattern repeats across deal types.
 
-**M&A:** The acquirer's senior principals — typically a CEO, CFO, and lead banker — will visit the target's HQ city in the 30–60 day window before signing. For billion-dollar transactions, these trips almost never happen commercially. The G650 flies.
+M&A: The acquirer's senior principals, typically a CEO, CFO, and lead banker, visit the target's HQ city in the 30 to 60 days before signing. Billion-dollar transactions almost never use commercial flights. The G650 flies.
 
-**Earnings:** Executives sometimes visit key customers, factories, or investor relations contacts in the weeks before a quarterly announcement. Unusual activity relative to their typical routing can signal either positive or negative news flow.
+Earnings: Executives visit key customers, factories, or investor relations contacts in the weeks before a quarterly announcement. Activity that deviates from their typical routing signals either positive or negative news flow.
 
-**Activist positioning:** Activists accumulate stakes quietly, but the in-person due diligence phase — plant visits, management meetings — generates jet activity before their 13D/13G is filed. Many activists use aircraft registered to LLCs, but tail numbers recur enough to be traceable.
+Activist positioning: Activists accumulate stakes quietly. The in-person due diligence phase, plant visits and management meetings, generates jet activity before their 13D or 13G is filed. Many activists register aircraft to LLCs, but tail numbers recur enough to trace.
 
-**Conference intelligence:** Sun Valley (Allen & Co.), the Milken Global Conference, Davos, Aspen Ideas — these gatherings concentrate deal principals. A PE firm jet flying to Hailey Municipal Airport (SUN) in early July is not random. Convergence of multiple tracked aircraft at the same small-market location is a stronger signal.
+Conference intelligence: Sun Valley (Allen and Co.), the Milken Global Conference, Davos, and Aspen Ideas concentrate deal principals. A PE firm jet flying to Hailey Municipal Airport (SUN) in early July is not random. Multiple tracked aircraft converging at the same small-market location is a stronger signal than any single visit.
 
-The underlying logic is simple: **M&A requires physical presence, physical presence generates ADS-B traces, and ADS-B is public**. The friction is aggregating and monitoring the data continuously.
+The logic is simple: M&A requires physical presence. Physical presence generates ADS-B traces. ADS-B is public. The work is aggregating and monitoring the data continuously.
 
-<span class="section-number">03 — Signal Design</span>
+<span class="section-number">03: Signal Design</span>
 
 ## Anomaly Detection Heuristics
 
-Three primary signals, in order of implementation complexity:
+Three signals, ordered by implementation complexity.
 
-### Signal A — Novel Destination
-Flag any tracked aircraft visiting a metro area it has not visited in 90+ days. The intuition: executives have established travel patterns. A Merck Gulfstream that has exclusively flown EWR–MIA–CLE for three months suddenly appearing near Palo Alto or Bentonville is anomalous.
+### Signal A: Novel Destination
+
+Flag any tracked aircraft visiting a metro area absent from its trailing 90-day routing history. Executives follow predictable travel patterns. A Merck Gulfstream flying exclusively EWR to MIA to CLE for three months, then appearing near Palo Alto or Bentonville, is anomalous.
 
 $$\text{Signal}_A = \mathbb{1}\left[\text{destination metro} \notin \mathcal{V}_{90d}(i)\right]$$
 
-where $\mathcal{V}_{90d}(i)$ is the set of destination metros visited by aircraft $i$ in the trailing 90 days. **Requires historical routing data** — see Section 05.
+where $\mathcal{V}_{90d}(i)$ is the set of destination metros visited by aircraft $i$ in the trailing 90 days. Signal A requires historical routing data. See Section 05.
 
-### Signal B — Convergence
-Flag when two or more tracked aircraft from **different operators** land at the same small-market airport within a 48-hour window. Small-market = not in the top-30 airports by enplanements.
+### Signal B: Convergence
+
+Flag two or more tracked aircraft from different operators landing at the same small-market airport within a 48-hour window. Small-market means outside the top 30 airports by enplanements.
 
 $$\text{Signal}_B = \mathbb{1}\left[\exists\, i \neq j :\; d(\text{pos}_i, \text{pos}_j) < 200\text{ km},\; \text{owner}(i) \neq \text{owner}(j),\; \text{airport} \notin \mathcal{H}\right]$$
 
-This version implements Signal B from the **live position snapshot**: if two tracked jets are airborne within 200 km of each other at a non-hub location, it fires. A 48-hour historical window would be more precise; the live approximation catches aircraft that are airborne simultaneously in the same region.
+The live version of Signal B uses the current position snapshot. When two tracked jets fly within 200 km of each other at a non-hub location, the signal fires. A 48-hour historical window produces more precise results. The live approximation catches aircraft airborne simultaneously in the same region.
 
-### Signal C — Burst Activity
-Flag aircraft making ≥4 round trips in a 7-day window against a baseline of ≤1/week. Burst typically indicates intensive due diligence (multiple site visits) or earnings prep.
+### Signal C: Burst Activity
+
+Flag any aircraft making four or more round trips in a 7-day window against a baseline of one or fewer per week. Burst activity typically means intensive due diligence across multiple site visits, or earnings prep.
 
 $$\text{Signal}_C = \mathbb{1}\left[\text{trips}_{7d}(i) \geq 4 \;\land\; \text{trips}_{7d}^{\text{baseline}}(i) \leq 1\right]$$
 
-**Requires historical routing data** — see Section 05.
+Signal C requires historical routing data. See Section 05.
 
-<span class="section-number">04 — Watchlist: Source and Coverage</span>
+<span class="section-number">04: Watchlist: Source and Coverage</span>
 
 ## FAA Registry Methodology
 
-The watchlist is derived entirely from the **FAA ReleasableAircraft database** (`registry.faa.gov/database/ReleasableAircraft.zip`), which publishes all US civil aircraft registrations weekly. The pipeline:
+The watchlist derives entirely from the FAA ReleasableAircraft database (`registry.faa.gov/database/ReleasableAircraft.zip`), published weekly with all US civil aircraft registrations. The pipeline runs three steps.
 
 <ol class="steps">
-<li><p><strong>Model code filter.</strong> Filter MASTER.txt to aircraft type codes for ultra-long-range business jets: Gulfstream G-IV through G800, Bombardier Global Express / Global 7500, Bombardier Challenger 300/604/605, Dassault Falcon 900/2000/7X, Cessna Citation X and Longitude. Model codes were verified against ACFTREF.txt seat counts — codes with more than 25 seats (CRJ-900, CRJ-1000, and other regional airliners sharing the CL-600 series designation) are excluded. This yields <strong>5,925 active bizjet registrations</strong> in the current database.</p></li>
-<li><p><strong>Registrant name matching.</strong> Apply regex patterns to the NAME field against known institutional entities. Many PE/hedge fund aircraft are held in opaque LLCs and will not match — only operators that registered aircraft in their own corporate name or a directly identifiable subsidiary are included. This yields the <strong>95 aircraft in the watchlist below</strong>.</p></li>
-<li><p><strong>ICAO24 hex codes.</strong> The FAA registry provides MODE S CODE HEX for each aircraft, which is the identifier used in ADS-B telemetry and by all live tracking APIs. Every watchlist entry includes a verified hex code from the registry.</p></li>
+<li><p>Filter MASTER.txt to aircraft type codes for large-cabin business jets: Gulfstream G-IV through G800, Bombardier Global Express and Global 7500, Bombardier Challenger 300, 604, and 605, Dassault Falcon 900, 2000, and 7X, and Cessna Citation X and Longitude. Each code was verified against seat counts in ACFTREF.txt. Codes with more than 25 seats are excluded. This removes CRJ-900 and CRJ-1000 regional airliners, which share the CL-600 designation with Challenger corporate jets. Result: 5,925 active registrations.</p></li>
+<li><p>Apply regex patterns to the NAME field against known institutional entities. Most PE and hedge fund aircraft sit in opaque LLCs and do not match. Only operators who registered aircraft in their own corporate name, or a directly identifiable subsidiary, appear here. Result: 95 aircraft.</p></li>
+<li><p>The FAA registry includes MODE S CODE HEX for each aircraft. This is the identifier ADS-B telemetry and all live tracking APIs use. Every watchlist entry includes a verified hex code from the registry.</p></li>
 </ol>
 
 <div class="info-box">
 <span class="info-box-label">Coverage Caveat</span>
-<p>This watchlist represents publicly transparent operators only — those that registered aircraft directly in their institutional name. Most PE and hedge fund aircraft are held in holding LLCs with opaque names (e.g., "THUNDER SKY AVIATION LLC") and will not appear here. The 95 aircraft are a floor, not a ceiling. The <code>build_watchlist.py</code> script in the repo can be re-run against each FAA weekly release to capture new registrations.</p>
+<p>This watchlist covers publicly transparent operators only: those who registered aircraft in their own institutional name. Most PE and hedge fund aircraft sit in holding LLCs with opaque names such as "THUNDER SKY AVIATION LLC" and do not appear. The 95 aircraft are a floor. Run build_watchlist.py against each weekly FAA release to add new registrations.</p>
 </div>
 
 **Current watchlist: 95 aircraft across 29 operators**
@@ -125,21 +128,21 @@ The watchlist is derived entirely from the **FAA ReleasableAircraft database** (
 | Wells Fargo | 1 | Finance |
 | *+ 2 others* | — | — |
 
-<span class="section-number" id="backtest">05 — Getting Real Results</span>
+<span class="section-number" id="backtest">05: Getting Real Results</span>
 
 ## Running the Backtest With Real Data
 
-The live scan above shows current positions. Signals A and C — novel destination and burst activity — require historical routing data: where each aircraft has been over the last 30–90 days. Here is exactly how to get it and what to do with it.
+The live scan shows current positions. Signals A and C require historical routing data: where each aircraft flew over the last 30 to 90 days. Here is exactly how to get the data and what to do with it.
 
 ### The data constraint
 
-The OpenSky Network REST API provides per-aircraft flight history (departure airport, arrival airport, timestamp) over a rolling **30-day window** for any registered user. Anonymous access is limited to ~48 hours and rate-limited too aggressively for batch queries. A free account resolves both problems.
+The OpenSky Network REST API returns per-aircraft flight history, departure airport, arrival airport, and timestamp, over a rolling 30-day window for any registered user. Anonymous access is limited to roughly 48 hours and rate-limits too aggressively for batch queries. A free account removes both restrictions.
 
-**Create one here (takes ~5 minutes):** [opensky-network.org/index.php?option=com_users&view=registration](https://opensky-network.org/index.php?option=com_users&view=registration)
+Create one here (takes about 5 minutes): [opensky-network.org/index.php?option=com_users&view=registration](https://opensky-network.org/index.php?option=com_users&view=registration)
 
-### Step 1 — Collect flight history
+### Step 1: Collect flight history
 
-With credentials, run `data/collect.py` once to pull 30 days of history for all 95 aircraft, then again daily to keep it current:
+With credentials, run `data/collect.py` once to pull 30 days of history for all 95 aircraft, then again daily to keep the database current:
 
 ```bash
 # First run: backfill 30 days
@@ -149,9 +152,9 @@ python collect.py --user YOUR_USERNAME --pass YOUR_PASSWORD --days 30
 0 6 * * * cd /path/to/data && python collect.py --user U --pass P >> collect.log 2>&1
 ```
 
-The script stores every flight in a local SQLite database (`flights.db`) — departure airport, arrival airport, ICAO24, timestamp — and deduplicates across runs. At 95 aircraft × ~3 flights/week average, a 30-day window yields roughly **400–600 flight records** to work with.
+The script stores every flight in a local SQLite database (`flights.db`): departure airport, arrival airport, ICAO24, and timestamp. Runs are deduplicated. At 95 aircraft averaging roughly 3 flights per week, a 30-day window produces 400 to 600 flight records.
 
-### Step 2 — Pull M&A announcements
+### Step 2: Pull M&A announcements
 
 SEC EDGAR's full-text search API provides free structured access to every merger agreement filing:
 
@@ -162,27 +165,27 @@ GET https://efts.sec.gov/LATEST/search-index
     &dateRange=custom&startdt=2024-01-01&enddt=2025-12-31
 ```
 
-Filter to deals where the acquirer matches a watchlist operator (JPMorgan, J&J, Merck, ExxonMobil, Chevron, General Dynamics, Honeywell, etc.) and extract the target's HQ city and announcement date.
+Filter to deals where the acquirer matches a watchlist operator, JPMorgan, J&J, Merck, ExxonMobil, Chevron, General Dynamics, Honeywell, and others, then extract the target's HQ city and announcement date.
 
-### Step 3 — Run the analysis
+### Step 3: Run the analysis
 
-`data/backtest.py` does the matching automatically: for each M&A event, it looks back 60 days, finds all watchlist flights by the acquirer's aircraft, and flags any that landed within 80 km of the target HQ. The script outputs a CSV with per-deal results and an aggregate hit rate.
+`data/backtest.py` does the matching automatically. For each M&A event, the script looks back 60 days, finds all watchlist flights by the acquirer's aircraft, and flags any flight landing within 80 km of the target HQ. Output is a CSV with per-deal results and an aggregate hit rate.
 
 ```bash
 python backtest.py YOUR_USERNAME YOUR_PASSWORD
 ```
 
-The M&A corpus hardcoded in the script covers 12 announced deals from 2021–2023 involving JPMorgan Chase, Johnson & Johnson, Merck, ExxonMobil ($59.5B Pioneer deal), Chevron ($53B Hess deal), Honeywell, Caterpillar, and General Dynamics. These predate the free 30-day API window, so the initial run will use only recent deals. For the 2021–2023 events, the OpenSky research dataset (application-based) or a paid provider (ADS-B Exchange, FlightAware AeroAPI) would be needed.
+The M&A corpus in the script covers 12 announced deals from 2021 to 2023. These include JPMorgan Chase, Johnson and Johnson, Merck, ExxonMobil (the $59.5B Pioneer deal), Chevron (the $53B Hess deal), Honeywell, Caterpillar, and General Dynamics. All of these predate the free 30-day API window. The initial run uses only recent deals. For the 2021 to 2023 events, you need either the OpenSky research dataset (application-based, at opensky-network.org/data/impala) or a paid provider such as ADS-B Exchange or FlightAware AeroAPI.
 
-### Why this matters for the ExxonMobil/Pioneer and Chevron/Hess deals
+### Why the ExxonMobil and Chevron deals matter as test cases
 
-These two deals — announced the same week in October 2023 — are the ideal test cases for this signal. ExxonMobil acquired Pioneer Natural Resources for $59.5 billion; Pioneer's HQ is in Dallas. Chevron acquired Hess Corporation for $53 billion; Hess is in New York. ExxonMobil and Chevron each have three tracked Gulfstream G650ERs. If either or both firms' jets were visiting Dallas or New York in the 30–60 days before October 11/23, 2023 respectively — especially if those were non-routine visits — that would be the signal in action.
+ExxonMobil announced the $59.5 billion acquisition of Pioneer Natural Resources on October 11, 2023. Chevron announced the $53 billion acquisition of Hess Corporation on October 23, 2023. Both deals were announced in the same week. Pioneer's HQ is in Dallas. Hess is in New York. ExxonMobil and Chevron each have three tracked Gulfstream G650ERs.
 
-Those dates are outside the free 30-day API window, so recovering that specific data requires either the OpenSky research archive (opensky-network.org/data/impala) or a paid ADS-B history API. For forward-looking monitoring of new deals, the free 30-day window is sufficient.
+If either firm's jets were flying to Dallas or New York in the 30 to 60 days before October 11 or 23, 2023, and those visits fell outside their normal routing, the signal fires. Recovering that data requires either the OpenSky research archive or a paid ADS-B history API. Both deals fall outside the free 30-day window. For new deals going forward, the free tier is sufficient.
 
 <div class="info-box">
 <span class="info-box-label">Run it yourself</span>
-<p>All the code is in this site's <code>data/</code> directory: <code>build_watchlist.py</code> (regenerate the FAA-sourced watchlist weekly), <code>collect.py</code> (daily flight data collection into SQLite), and <code>backtest.py</code> (M&A correlation analysis). The only external dependency beyond the FAA public download is a free OpenSky account.</p>
+<p>All code is in this site's <code>data/</code> directory. <code>build_watchlist.py</code> regenerates the FAA-sourced watchlist weekly. <code>collect.py</code> runs daily collection into SQLite. <code>backtest.py</code> runs the M&A correlation analysis. The only external dependency beyond the FAA public download is a free OpenSky account.</p>
 </div>
 
 <script>

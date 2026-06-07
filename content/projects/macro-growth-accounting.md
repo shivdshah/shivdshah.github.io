@@ -18,7 +18,7 @@ description: Decomposing economic growth using the Penn World Tables, 1950–201
 
 ## The dataset: Penn World Tables
 
-The Penn World Tables (version 10.0) provide harmonised national accounts data for 183 countries from 1950 onwards, expressed on a consistent 2017 USD basis. This cross-country comparability is what makes the dataset well-suited to a study like this one: because purchasing power and price levels differ between Portugal and Ethiopia, raw GDP figures in local currency are not directly comparable. The PWT adjusts for these differences.
+The Penn World Tables (version 10.0) provide harmonised national accounts data for 183 countries from 1950 onwards, expressed on a consistent 2017 USD basis. This cross-country comparability is what makes the dataset well-suited to a study like this one. Because purchasing power and price levels differ between Portugal and Ethiopia, raw GDP figures in local currency are not directly comparable. The PWT adjusts for these differences.
 
 | Variable | Code | Description |
 |----------|------|-------------|
@@ -48,7 +48,7 @@ T      = len(YP)      # sample size = 70
 
 ## Part A: trend analysis of GDP time paths
 
-The first task was to plot the GDP time paths for both countries — first as log real GDP and then as real GDP per capita — and to fit four trend specifications to each. Working in logs is standard practice in macroeconomics because it linearises multiplicative growth: a straight line through log GDP implies a constant percentage growth rate, and deviations from the trend are interpretable directly as percentage differences.
+The first task was to plot the GDP time paths for both countries. First as log real GDP, then as real GDP per capita. Four trend specifications were fit to each. Working in logs is standard practice in macroeconomics because it linearises multiplicative growth: a straight line through log GDP implies a constant percentage growth rate, and deviations from the trend are interpretable directly as percentage differences.
 
 The four trend specifications combine two functional forms (additive and exponential) with two polynomial orders (linear and quadratic):
 
@@ -80,9 +80,9 @@ for t in range(T):
 ```
 
 > [!note] Why plot log GDP rather than levels?
-> A trend line through log GDP implies a constant annual growth rate, which is the natural baseline for a growing economy. In levels, the same trend would be an exponential curve, making deviations from trend harder to read visually. Working in logs also means all four trend specifications can be plotted on the same axis scale, with linear and quadratic variants directly comparable.
+> A trend line through log GDP implies a constant annual growth rate, which is the natural baseline for a growing economy. In levels, the same trend would be an exponential curve, making deviations from trend harder to read visually. Working in logs also means all four trend specifications are plotted on the same axis scale, with linear and quadratic variants directly comparable.
 
-Plotting confirmed the broad narrative each country's history would suggest. Portugal shows a steep upward trajectory through the 1960s and 1970s, a levelling-off around EU accession in 1986, and a visible interruption around the 2008–2012 sovereign debt crisis. Ethiopia's log GDP path is lower and more volatile through the mid-20th century — reflecting political instability and periodic famine — before accelerating sharply from the early 2000s on the back of sustained public investment.
+Plotting confirmed the broad narrative each country's history suggests. Portugal shows a steep upward trajectory through the 1960s and 1970s, a levelling-off around EU accession in 1986, and a visible interruption around the 2008-2012 sovereign debt crisis. Ethiopia's log GDP path is lower and more volatile through the mid-20th century, reflecting political instability and periodic famine, before accelerating sharply from the early 2000s on the back of sustained public investment.
 
 For Portugal, the exponential quadratic trend fits the data most closely, capturing the acceleration in early decades and the post-2008 flattening. For Ethiopia, the exponential linear trend is a reasonable summary over the full period, though it masks the structural break visible around 2000.
 
@@ -90,7 +90,7 @@ For Portugal, the exponential quadratic trend fits the data most closely, captur
 
 ## Part B: extracting Total Factor Productivity
 
-Total Factor Productivity (TFP) is the component of output that cannot be attributed to the measurable inputs of capital and labour. It captures improvements in technology, management, institutions, and efficiency more broadly. Because it cannot be observed directly, it must be backed out from data using an assumed production function.
+Total Factor Productivity (TFP) is the component of output not attributable to the measurable inputs of capital and labour. It captures improvements in technology, management, institutions, and efficiency more broadly. Because TFP cannot be observed directly, you must back it out from data using an assumed production function.
 
 ### The Cobb-Douglas production function
 
@@ -102,7 +102,7 @@ where $Y_t$ is real GDP, $K_t$ is the capital stock, $L_t$ is employment, $A_t$ 
 
 $$A_t = Y_t \cdot K_t^{-\alpha} \cdot L_t^{\alpha - 1}$$
 
-This formula requires no estimation — it is a straightforward computation once the production function parameters are specified. The code below applies it to both countries simultaneously.
+This formula requires no estimation. It is a straightforward computation once the production function parameters are specified. The code below applies it to both countries simultaneously.
 
 ```python
 alpha = 0.3
@@ -142,7 +142,7 @@ data_e["A"] = (data_e["rgdpna"]
 
 Both levels and logs of TFP were plotted for each country. Portugal's TFP grew broadly upwards through most of the period, consistent with sustained technology adoption and efficiency gains accompanying EU integration. The post-2008 plateau is clearly visible, reflecting the combined impact of the global financial crisis and the subsequent sovereign debt crisis on productivity.
 
-Ethiopia's TFP in levels is harder to interpret because the absolute values are much lower, but the log TFP plot tells a more interesting story: significant volatility through the 1970s–90s followed by a structural improvement from the early 2000s. This matches the broader literature on Ethiopian growth, which identifies infrastructure-led development and improved governance as key drivers of the acceleration.
+Ethiopia's TFP in levels is harder to interpret because the absolute values are much lower. The log TFP plot tells a more interesting story: significant volatility through the 1970s-90s followed by a structural improvement from the early 2000s. This matches the broader literature on Ethiopian growth, which identifies infrastructure-led development and improved governance as key drivers of the acceleration.
 
 <span class="section-number">Section 04</span>
 
@@ -152,7 +152,7 @@ Growth accounting translates the Cobb-Douglas production function into a stateme
 
 $$\Delta \log Y_t = \Delta \log A_t + \alpha \cdot \Delta \log K_t + (1-\alpha) \cdot \Delta \log L_t$$
 
-This says that the growth rate of GDP equals the growth rate of TFP plus the capital-share-weighted growth rate of capital plus the labour-share-weighted growth rate of labour. The *contribution* of each factor to GDP growth is its term divided by the total, expressing how much of GDP growth in each year can be attributed to each input.
+This says the growth rate of GDP equals the growth rate of TFP plus the capital-share-weighted growth rate of capital plus the labour-share-weighted growth rate of labour. The contribution of each factor to GDP growth is its term divided by the total, expressing how much of GDP growth in each year is attributable to each input.
 
 ```python
 # Initialise arrays: T-1 periods (no log change for year zero)
@@ -194,13 +194,13 @@ growth_table_p.index.name = "Time Period"
 ```
 
 > [!note] Interpreting contributions greater than 1 or less than 0
-> In any given year, if one factor's contribution exceeds 1 (or falls below 0), it means that factor contributed more than 100% of GDP growth — which is only possible because another factor was dragging on growth. For example, capital might contribute 120% of growth while labour subtracts 20%, still summing to 100% overall. Years with very small or negative GDP growth are particularly prone to large, volatile contribution estimates, which is why the average over many years is more informative than any individual year-pair.
+> In any given year, if one factor's contribution exceeds 1 (or falls below 0), it means a factor contributed more than 100% of GDP growth. This is only possible because another factor was dragging on growth. For example, capital might contribute 120% of growth while labour subtracts 20%, still summing to 100% overall. Years with very small or negative GDP growth are particularly prone to large, volatile contribution estimates, which is why the average over many years is more informative than any individual year-pair.
 
 <span class="section-number">Section 05</span>
 
 ## Key findings
 
-Averaging the annual contribution figures over the full 1950–2019 period reveals a marked difference in the structure of growth between the two countries.
+Averaging the annual contribution figures over the full 1950-2019 period reveals a marked difference in the structure of growth between the two countries.
 
 <div class="stat-grid">
   <div class="stat-card">
@@ -227,41 +227,41 @@ Averaging the annual contribution figures over the full 1950–2019 period revea
 
 ### Portugal: productivity-led convergence
 
-A substantial share of Portugal's growth over the period was driven by TFP rather than raw factor accumulation. This is consistent with a convergence story: as a lower-income country adopting the technologies and practices of its more advanced European neighbours, Portugal could generate productivity gains at relatively low cost. EU accession in 1986 accelerated this process, opening the economy to trade, capital flows, and institutional improvements.
+A substantial share of Portugal's growth over the period came from TFP rather than raw factor accumulation. This is consistent with a convergence story: as a lower-income country adopting the technologies and practices of its more advanced European neighbours, Portugal generated productivity gains at relatively low cost. EU accession in 1986 accelerated this process, opening the economy to trade, capital flows, and institutional improvements.
 
 Capital also made a significant contribution, particularly in the 1960s and 1970s as the country industrialised. Labour's contribution was more modest on average, partly reflecting demographic pressures and emigration in earlier decades.
 
 <div class="result-banner">
   <div>
-    <span class="result-label">Portugal — dominant growth driver</span>
+    <span class="result-label">Portugal: dominant growth driver</span>
     <span class="result-value">TFP</span>
   </div>
-  <p class="result-context">Productivity gains — rather than simply deploying more capital or labour — account for the largest single share of Portugal's GDP growth across the 70-year sample. This is the hallmark of a country successfully climbing the development ladder through technology adoption and institutional improvement.</p>
+  <p class="result-context">Productivity gains, rather than simply deploying more capital or labour, account for the largest single share of Portugal's GDP growth across the 70-year sample. This is the hallmark of a country successfully climbing the development ladder through technology adoption and institutional improvement.</p>
 </div>
 
 ### Ethiopia: investment-driven acceleration
 
-Ethiopia's growth story is structurally different. Capital accumulation — driven largely by large-scale public infrastructure programmes in roads, energy, and telecommunications — accounts for a higher share of growth than TFP, particularly in the post-2000 acceleration phase. This pattern is typical of early-stage development: before the productivity benefits of new infrastructure materialise, much of the growth is simply the mechanical result of adding more capital to the production process.
+Ethiopia's growth story is structurally different. Capital accumulation, driven largely by large-scale public infrastructure programmes in roads, energy, and telecommunications, accounts for a higher share of growth than TFP. This is especially true in the post-2000 acceleration phase. This pattern is typical of early-stage development: before the productivity benefits of new infrastructure materialise, much of the growth is the mechanical result of adding more capital to the production process.
 
-Labour's contribution was positive and more visible in Ethiopia than in Portugal, consistent with a younger, faster-growing workforce being drawn from subsistence agriculture into more productive employment in industry and services. TFP growth, while positive on average, was volatile across the full period and pulled down by the episodes of political disruption in the 1970s–80s.
+Labour's contribution was positive and more visible in Ethiopia than in Portugal, consistent with a younger, faster-growing workforce being drawn from subsistence agriculture into more productive employment in industry and services. TFP growth, while positive on average, was volatile across the full period and pulled down by the episodes of political disruption in the 1970s-80s.
 
 <div class="result-banner">
   <div>
-    <span class="result-label">Ethiopia — dominant growth driver</span>
+    <span class="result-label">Ethiopia: dominant growth driver</span>
     <span class="result-value">Capital (K)</span>
   </div>
-  <p class="result-context">Capital accumulation — particularly public investment in infrastructure — accounts for the largest share of Ethiopia's GDP growth across the sample, with TFP and labour playing supporting roles. The growth model is consistent with early-stage development driven by input expansion rather than efficiency gains.</p>
+  <p class="result-context">Capital accumulation, particularly public investment in infrastructure, accounts for the largest share of Ethiopia's GDP growth across the sample, with TFP and labour playing supporting roles. The growth model is consistent with early-stage development driven by input expansion rather than efficiency gains.</p>
 </div>
 
 <span class="section-number">Section 06</span>
 
 ## What I would do differently
 
-The analysis relies on a number of simplifying assumptions that are standard in the growth accounting literature but worth making explicit. Each represents a direction in which the analysis could be extended.
+The analysis relies on a number of simplifying assumptions standard in the growth accounting literature. Each represents a direction in which the analysis extends further.
 
 <ol class="steps">
-  <li><p><strong>Estimating α from the data.</strong> The capital share of 0.3 was imposed rather than estimated. In practice, the labour share of income (which gives 1 − α directly) can be read from national accounts data. Using country-specific, time-varying estimates of α would give a more accurate picture, particularly for Ethiopia where factor shares are likely to differ from OECD norms and have evolved over the development process.</p></li>
-  <li><p><strong>Human capital adjustment.</strong> The standard Cobb-Douglas used here treats all workers as equivalent. A richer specification — following Hall and Jones (1999) — adjusts the labour input for education levels, constructing a human capital index from average years of schooling and Mincerian returns. This would allow TFP to capture pure technology and institutions more cleanly, rather than absorbing differences in workforce quality.</p></li>
-  <li><p><strong>Capacity utilisation.</strong> The capital stock variable measures the total stock of physical capital, but not how intensively it is being used. During recessions, capital is underutilised, and the measured contribution of capital understates the role of demand conditions. Cyclically adjusting the capital input would help separate structural growth from cyclical fluctuations.</p></li>
-  <li><p><strong>Sub-period analysis.</strong> Averaging contributions over 70 years obscures the distinct phases visible in both countries' time paths. Breaking the sample into sub-periods — say 1950–1985, 1986–2007, and 2008–2019 for Portugal — would reveal how the sources of growth shifted around major structural events such as EU accession and the financial crisis.</p></li>
+  <li><p><strong>Estimating α from the data.</strong> The capital share of 0.3 was imposed rather than estimated. In practice, the labour share of income (which gives 1 − α directly) is readable from national accounts data. Using country-specific, time-varying estimates of α would give a more accurate picture, particularly for Ethiopia where factor shares are likely to differ from OECD norms and have evolved over the development process.</p></li>
+  <li><p><strong>Human capital adjustment.</strong> The standard Cobb-Douglas used here treats all workers as equivalent. A richer specification, following Hall and Jones (1999), adjusts the labour input for education levels, constructing a human capital index from average years of schooling and Mincerian returns. This would allow TFP to capture pure technology and institutions more cleanly, rather than absorbing differences in workforce quality.</p></li>
+  <li><p><strong>Capacity utilisation.</strong> The capital stock variable measures the total stock of physical capital, not how intensively it is being used. During recessions, capital is underutilised, and the measured contribution of capital understates the role of demand conditions. Cyclically adjusting the capital input would help separate structural growth from cyclical fluctuations.</p></li>
+  <li><p><strong>Sub-period analysis.</strong> Averaging contributions over 70 years obscures the distinct phases visible in both countries' time paths. Breaking the sample into sub-periods, say 1950-1985, 1986-2007, and 2008-2019 for Portugal, would reveal how the sources of growth shifted around major structural events such as EU accession and the financial crisis.</p></li>
 </ol>

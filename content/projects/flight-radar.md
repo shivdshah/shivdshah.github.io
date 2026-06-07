@@ -5,14 +5,14 @@ tags:
   - aviation
   - api
   - adsb
-description: Live overhead aircraft tracker using ADS-B telemetry. No backend, no API keys — all client-side.
+description: Live overhead aircraft tracker using ADS-B telemetry. No backend, no API keys, all client-side.
 ---
 
 <div class="abstract">
-<p>Enter your coordinates and a search radius to identify the closest airborne aircraft overhead — querying live ADS-B telemetry from ADSB.fi. No backend, no API keys, no server-side code. Everything runs in the browser.</p>
+<p>Enter your coordinates and a search radius to find the closest airborne aircraft overhead. The tool queries live ADS-B telemetry from ADSB.fi. No backend, no API keys, no server-side code. Everything runs in the browser.</p>
 </div>
 
-<span class="section-number">01 — The Tool</span>
+<span class="section-number">01: The Tool</span>
 
 ## Overhead Aircraft Lookup
 
@@ -40,29 +40,29 @@ Find Closest Aircraft
 
 <div id="fr-result"></div>
 
-<span class="section-number">02 — Technical Write-up</span>
+<span class="section-number">02: Technical Write-up</span>
 
 ## How It Works
 
-This tool runs entirely in the browser — no backend, no API keys, no server-side code. Every result is assembled client-side from two open REST APIs, combining live radio telemetry with a crowd-sourced route database.
+This tool runs entirely in the browser. No backend, no API keys, no server-side code. Every result is assembled client-side from two open REST APIs: live radio telemetry and a crowd-sourced route database.
 
 ### ADS-B and ADSB.fi
 
-Modern commercial aircraft continuously transmit their position using **Automatic Dependent Surveillance-Broadcast (ADS-B)**. Unlike conventional secondary radar — which works by interrogating aircraft with a ground-based signal — ADS-B is *unsolicited*: the aircraft's onboard avionics derive a GPS fix and broadcast a 1090 MHz signal containing its ICAO address, barometric altitude, ground speed, track angle, and vertical rate roughly every 0.5 seconds. Any receiver within line-of-sight can decode it without coordination with the aircraft.
+Modern commercial aircraft continuously transmit their position using Automatic Dependent Surveillance-Broadcast (ADS-B). Unlike conventional secondary radar, which works by interrogating aircraft with a ground-based signal, ADS-B is unsolicited. The aircraft's onboard avionics derive a GPS fix and broadcast a 1090 MHz signal containing its ICAO address, barometric altitude, ground speed, track angle, and vertical rate roughly every 0.5 seconds. Any receiver within line-of-sight decodes it without coordination with the aircraft.
 
-**Airplanes.live** is a free, community-operated ADS-B aggregator. Their public REST API sends `Access-Control-Allow-Origin: *` headers, making it suitable for direct browser calls with no server needed. A single request to `/v2/point/{lat}/{lon}/{radius}` returns the state vector for every tracked aircraft in the radius — including type code, registration, description, and distance from the query point.
+Airplanes.live is a free, community-operated ADS-B aggregator. Their public REST API sends `Access-Control-Allow-Origin: *` headers, making it suitable for direct browser calls with no server needed. A single request to `/v2/point/{lat}/{lon}/{radius}` returns the state vector for every tracked aircraft in the radius, including type code, registration, description, and distance from the query point.
 
-### Step 1 — Querying by Radius
+### Step 1: Querying by Radius
 
-The ADSB.fi endpoint takes a centre point and a radius in nautical miles directly, so no bounding-box conversion is needed. The user's kilometre radius is converted before the request:
+The ADSB.fi endpoint takes a centre point and a radius in nautical miles directly, so no bounding-box conversion is needed. Your kilometre radius is converted before the request:
 
 $$r_{\text{nm}} = \left\lceil \frac{r_{\text{km}}}{1.852} \right\rceil$$
 
 The API returns every tracked aircraft within that radius, each with a `dst` field giving its distance from the query point in nautical miles. Aircraft flagged as on-ground (`alt_baro = "ground"`) are filtered out before ranking.
 
-### Step 2 — Finding the Closest Aircraft via Haversine
+### Step 2: Finding the Closest Aircraft via Haversine
 
-Aircraft are ranked by the `dst` field ADSB.fi provides. As a fallback — and to verify — the **Haversine formula** computes the true great-circle distance for any aircraft missing a `dst` value:
+Aircraft are ranked by the `dst` field ADSB.fi provides. As a fallback, the Haversine formula computes the true great-circle distance for any aircraft missing a `dst` value:
 
 $$a = \sin^2\!\left(\frac{\Delta\phi}{2}\right) + \cos\phi_1\,\cos\phi_2\,\sin^2\!\left(\frac{\Delta\lambda}{2}\right)$$
 
@@ -70,9 +70,9 @@ $$d = 2R \arctan2\!\left(\sqrt{a},\;\sqrt{1-a}\right)$$
 
 where $\phi$ and $\lambda$ are latitude and longitude in radians and $R = 6{,}371\,\text{km}$ is Earth's mean radius. The aircraft minimising $d$ is selected.
 
-### Step 3 — Enriching with Route Data
+### Step 3: Enriching with Route Data
 
-ADSB.fi returns the aircraft's ICAO type code, registration, and callsign directly. The one field it does not carry is the flight's *route* — origin and destination airports. For that, a second call goes to **ADSBDB**, a free crowd-sourced flight database:
+ADSB.fi returns the aircraft's ICAO type code, registration, and callsign directly. The one field it does not carry is the flight's route: origin and destination airports. For that, a second call goes to ADSBDB, a free crowd-sourced flight database:
 
 | Endpoint | Data returned |
 |---|---|
@@ -91,12 +91,12 @@ ADSB.fi returns values in aviation-standard units rather than SI, so only two co
 | Vertical rate | ft/min | ft/s | ÷ 60 |
 | Track | degrees true (N = 0°) | degrees + cardinal | — |
 
-Barometric altitude is used rather than GPS geometric altitude because it is what ATC and pilots use operationally — referenced to the standard pressure datum of 1013.25 hPa.
+Barometric altitude is used rather than GPS geometric altitude because it is what ATC and pilots use operationally, referenced to the standard pressure datum of 1013.25 hPa.
 
 ### Limitations and Data Gaps
 
 > [!note] Data availability
-> **Not all aircraft are visible.** ADS-B equipage is mandatory for aircraft flying in controlled airspace above FL180 in most jurisdictions, but lighter general aviation, military, and some private charter operators may be exempt or may disable their transponder. ADSBDB route data is crowd-sourced and may be absent for cargo, positioning, or general aviation callsigns — in those cases the route fields display `???`.
+> Not all aircraft are visible. ADS-B equipage is mandatory for aircraft flying in controlled airspace above FL180 in most jurisdictions, but lighter general aviation, military, and some private charter operators are exempt or disable their transponder. ADSBDB route data is crowd-sourced and will be absent for cargo, positioning, or general aviation callsigns. In those cases the route fields display `???`.
 
 <script>
 (function () {
