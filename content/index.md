@@ -29,3 +29,4 @@ I'm interested in GTM systems, quantitative methods, and investing. This site ha
 ## Other
 
 - [[other/gita-verse-finder|Gita Verse Finder]]: Select a theme — duty, grief, love, anger, impermanence — and receive a verse from the Bhagavad Gita.
+- [[other/city-distance-guessr|City Distance Guessr]]: Guess the great-circle distance between two cities. Five rounds, up to 1000 points each.
