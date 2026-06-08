@@ -175,11 +175,11 @@ Filter to deals where the acquirer matches a watchlist operator, JPMorgan, J&J, 
 python backtest.py YOUR_USERNAME YOUR_PASSWORD
 ```
 
-The M&A corpus in the script covers 12 announced deals from 2021 to 2023. These include JPMorgan Chase, Johnson and Johnson, Merck, ExxonMobil (the $59.5B Pioneer deal), Chevron (the $53B Hess deal), Honeywell, Caterpillar, and General Dynamics. All of these predate the free 30-day API window. The initial run uses only recent deals. For the 2021 to 2023 events, you need either the OpenSky research dataset (application-based, at opensky-network.org/data/impala) or a paid provider such as ADS-B Exchange or FlightAware AeroAPI.
+The M&A corpus in the script covers 12 announced deals from 2021 to 2023. These include JPMorgan Chase, Johnson and Johnson, Merck, ExxonMobil (the \$59.5B Pioneer deal), Chevron (the \$53B Hess deal), Honeywell, Caterpillar, and General Dynamics. All of these predate the free 30-day API window. The initial run uses only recent deals. For the 2021 to 2023 events, you need either the OpenSky research dataset (application-based, at opensky-network.org/data/impala) or a paid provider such as ADS-B Exchange or FlightAware AeroAPI.
 
 ### Why the ExxonMobil and Chevron deals matter as test cases
 
-ExxonMobil announced the $59.5 billion acquisition of Pioneer Natural Resources on October 11, 2023. Chevron announced the $53 billion acquisition of Hess Corporation on October 23, 2023. Both deals were announced in the same week. Pioneer's HQ is in Dallas. Hess is in New York. ExxonMobil and Chevron each have three tracked Gulfstream G650ERs.
+ExxonMobil announced the \$59.5 billion acquisition of Pioneer Natural Resources on October 11, 2023. Chevron announced the \$53 billion acquisition of Hess Corporation on October 23, 2023. Both deals were announced in the same week. Pioneer's HQ is in Dallas. Hess is in New York. ExxonMobil and Chevron each have three tracked Gulfstream G650ERs.
 
 If either firm's jets were flying to Dallas or New York in the 30 to 60 days before October 11 or 23, 2023, and those visits fell outside their normal routing, the signal fires. Recovering that data requires either the OpenSky research archive or a paid ADS-B history API. Both deals fall outside the free 30-day window. For new deals going forward, the free tier is sufficient.
 

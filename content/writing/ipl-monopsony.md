@@ -23,7 +23,7 @@ I have remained an admirer of what the BCCI built. The ambition of the project, 
 
 The Indian Premier League is routinely described as one of the most elegant pieces of market design in the history of professional sport. Hard salary caps prevent dynasties. A public auction sets player prices with real-time transparency. Central revenue distribution keeps franchises on roughly equal financial footing. Economists spent fifty years trying to articulate what an optimally functioning sports league should look like. The IPL, largely by accident, built something close to it.
 
-The numbers are difficult to argue with. Eight different franchises have reached the final in seventeen seasons. Six different teams have won the title. No franchise has won three consecutive seasons. The per-match media rights value of $16.8 million places the IPL second in the world, behind only the NFL. Every franchise is profitable. Total league valuation sits at approximately $18 billion. By almost every conventional sports economics metric, this is an extraordinary achievement. The fastest-growing major sports league on earth, built in a country with no prior franchise culture, in under two decades.
+The numbers are difficult to argue with. Eight different franchises have reached the final in seventeen seasons. Six different teams have won the title. No franchise has won three consecutive seasons. The per-match media rights value of \$16.8 million places the IPL second in the world, behind only the NFL. Every franchise is profitable. Total league valuation sits at approximately \$18 billion. By almost every conventional sports economics metric, this is an extraordinary achievement. The fastest-growing major sports league on earth, built in a country with no prior franchise culture, in under two decades.
 
 But beneath this well-designed surface lies a structural contradiction that rarely gets the examination it deserves. The IPL is both the world's most successful cricket league and one of the most effective wage suppression mechanisms in modern professional sport. The players who generate this extraordinary value receive a share of revenues that would be considered impoverished by the standards of any comparably valued league. The market design looks elegant from the outside. It was built partly, and not accidentally, on a labour market rigged from the start.
 
@@ -33,9 +33,9 @@ Understanding why this happened, and why no one has meaningfully challenged it, 
 
 In the NFL, players receive approximately 48% of total league revenues through collective bargaining, a figure negotiated through decades of adversarial labour disputes, including a strike in 1987 and legal action in 1992. In the NBA, the split is roughly 50/50. The Basketball Related Income split sits at the centre of the collective bargaining agreement, and both sides negotiate hard over it every few years, including a lockout in 2011 that shortened the season. In Major League Baseball, despite having no salary cap at all, players receive roughly 55% of total revenues. The MLBPA is the most powerful players' union in American sport. Even in the English Premier League, where financial mismanagement is endemic, wage-to-revenue ratios regularly exceed 60%.
 
-In the IPL, the equivalent figure is somewhere between 17% and 24%, depending on how you define the revenue base. Chennai Super Kings, one of the most commercially successful franchises and one of the few with publicly available accounts, pays its players roughly 24% of total revenues. At the league level, total player costs of approximately $144 million per season sit against combined franchise revenues in excess of $850 million. The gap is not marginal. It is structural, it has widened every year, and no one with institutional power has any reason to fix it.
+In the IPL, the equivalent figure is somewhere between 17% and 24%, depending on how you define the revenue base. Chennai Super Kings, one of the most commercially successful franchises and one of the few with publicly available accounts, pays its players roughly 24% of total revenues. At the league level, total player costs of approximately \$144 million per season sit against combined franchise revenues in excess of \$850 million. The gap is not marginal. It is structural, it has widened every year, and no one with institutional power has any reason to fix it.
 
-The salary cap for the 2025 season stood at INR 120 crore ($14.4 million) per team. That ceiling has grown at a compound annual rate of roughly 9.5% since the league's founding. Over the same period, the per-team share of central broadcast revenues has grown at closer to 11%. These numbers look similar. The difference compounds. Every season, the players' share of the economic pie gets marginally smaller. In absolute terms, the best-paid IPL players earn more than ever. In relative terms, they fall further behind the league they are generating.
+The salary cap for the 2025 season stood at INR 120 crore (\$14.4 million) per team. That ceiling has grown at a compound annual rate of roughly 9.5% since the league's founding. Over the same period, the per-team share of central broadcast revenues has grown at closer to 11%. These numbers look similar. The difference compounds. Every season, the players' share of the economic pie gets marginally smaller. In absolute terms, the best-paid IPL players earn more than ever. In relative terms, they fall further behind the league they are generating.
 
 ## The Anatomy of a Monopsony
 
@@ -60,7 +60,7 @@ To estimate what the IPL labour market would look like without monopsony power, 
 
 ### Step 1: The Revenue Base
 
-The current IPL media rights deal (2023–2027) is worth $6.2 billion over five years, or $1.24 billion per year. The BCCI retains 50% of central revenues. The remaining $620 million is distributed across franchises annually (approximately 45% equally and 5% on a performance basis). Adding franchise-specific revenues, including team sponsorships, jersey deals, ticket sales, and local partnerships, which typically contribute $15–25 million per team, brings total franchise-level revenues to approximately $77–87 million per team, or roughly $850 million across the league as a whole.
+The current IPL media rights deal (2023–2027) is worth \$6.2 billion over five years, or \$1.24 billion per year. The BCCI retains 50% of central revenues. The remaining \$620 million is distributed across franchises annually (approximately 45% equally and 5% on a performance basis). Adding franchise-specific revenues, including team sponsorships, jersey deals, ticket sales, and local partnerships, which typically contribute \$15–25 million per team, brings total franchise-level revenues to approximately \$77–87 million per team, or roughly \$850 million across the league as a whole.
 
 <div class="stat-grid">
   <div class="stat-card">
@@ -101,17 +101,17 @@ European football typically runs higher, at 60–70%, but this reflects an absen
 
 ### Step 3: The Competitive Market Wage
 
-Applying a 50% labour share to total franchise revenues of approximately $850 million gives a competitive player payroll of $425 million per season across all ten franchises. This implies an average competitive salary cap of approximately $42.5 million per team, roughly three times the current INR 120 crore ($14.4 million) ceiling.
+Applying a 50% labour share to total franchise revenues of approximately \$850 million gives a competitive player payroll of \$425 million per season across all ten franchises. This implies an average competitive salary cap of approximately \$42.5 million per team, roughly three times the current INR 120 crore (\$14.4 million) ceiling.
 
 | Metric | Actual (2025) | Competitive benchmark |
 |--------|--------------|----------------------|
-| Total player costs (all teams) | ~$144M | ~$425M |
-| Average salary cap per team | ~$14.4M | ~$42.5M |
+| Total player costs (all teams) | ~\$144M | ~\$425M |
+| Average salary cap per team | ~\$14.4M | ~\$42.5M |
 | Labour share of franchise revenues | ~17–24% | ~50% |
-| Highest individual contract (Rishabh Pant) | ~$3.2M | ~$8–12M (est.) |
-| **Implied monopsony tax (per season)** | | **~$281M annually** |
+| Highest individual contract (Rishabh Pant) | ~\$3.2M | ~\$8–12M (est.) |
+| **Implied monopsony tax (per season)** | | **~\$281M annually** |
 
-The individual player estimate deserves elaboration. Rishabh Pant is the most expensive player in IPL history at ₹27 crore ($3.2 million for a seven-week season). He is also arguably the most bankable cricketer in India after Virat Kohli, a keeping-batting all-rounder with global commercial appeal and a compelling personal backstory. In the NBA, a player with Pant's combination of competitive value and commercial marketability would command somewhere between $20–35 million per season. The IPL comparison is not like-for-like; the NBA season is much longer and the market is different. Even accounting for these differences, an $8–12 million estimate for a competitive IPL contract for a player of Pant's standing is conservative.
+The individual player estimate deserves elaboration. Rishabh Pant is the most expensive player in IPL history at ₹27 crore (\$3.2 million for a seven-week season). He is also arguably the most bankable cricketer in India after Virat Kohli, a keeping-batting all-rounder with global commercial appeal and a compelling personal backstory. In the NBA, a player with Pant's combination of competitive value and commercial marketability would command somewhere between \$20–35 million per season. The IPL comparison is not like-for-like; the NBA season is much longer and the market is different. Even accounting for these differences, an \$8–12 million estimate for a competitive IPL contract for a player of Pant's standing is conservative.
 
 <div class="result-banner">
   <div>
@@ -167,7 +167,7 @@ The IPL is routinely discussed as a cricket story. It should be more precisely u
 
 The franchise market works beautifully. Competitive balance is real. Price discovery in the auction is genuine. Revenue distribution across teams is equitable. These are genuine achievements, and they deserve the attention they get. But they are achievements accruing to franchises and to the BCCI. The players who make these achievements possible, who provide the competitive uncertainty, the athleticism, the moments shifting 600 million viewers to the edge of their seats, are the one constituency for whom the market was not designed to work well, and the one constituency with the least institutional power to change that.
 
-The IPL is often described as an accidentally optimal sports league. That is a generous framing. What it built was an optimally designed league for everyone except the people playing the game. The market producing results so admirable at the franchise level produces, at the labour market level, an implied annual transfer of roughly $281 million from the athletes who generate the value to the institutions that capture it.
+The IPL is often described as an accidentally optimal sports league. That is a generous framing. What it built was an optimally designed league for everyone except the people playing the game. The market producing results so admirable at the franchise level produces, at the labour market level, an implied annual transfer of roughly \$281 million from the athletes who generate the value to the institutions that capture it.
 
 Seventeen seasons in, that transfer has not attracted the scrutiny it deserves. This is partly because the amounts, in IPL terms, look large. Rishabh Pant earning ₹27 crore for seven weeks is genuinely extraordinary in the context of Indian salaries, and in the context of what cricketers have historically earned. The relevant comparison is not what cricketers used to earn. It is what players of equivalent commercial value earn in other sports businesses of equivalent scale. On that comparison, the numbers are not flattering.
 

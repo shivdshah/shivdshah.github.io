@@ -483,6 +483,42 @@ body[data-slug="index"] .content-meta {
 }
 .leaflet-popup-content { margin: 0.65rem 0.85rem !important; }
 
+// ── Graph: fix canvas wider than container (timing/layout issue) ─────────────
+.graph-outer {
+  overflow: hidden;
+  position: relative;
+}
+.graph-container {
+  overflow: hidden;
+  position: relative;
+}
+.graph-outer canvas,
+.graph-container > canvas {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// ── Explorer: separate items visually ────────────────────────────────────────
+.explorer-content ul li {
+  padding: 0.18rem 0;
+}
+.explorer-content ul > li + li {
+  border-top: 1px solid var(--lightgray);
+  padding-top: 0.25rem;
+  margin-top: 0.1rem;
+}
+
+// ── Flight Radar: ensure form fills available width ───────────────────────────
+.flight-form {
+  width: 100%;
+  box-sizing: border-box;
+}
+.flight-input-row {
+  align-items: end;
+}
+
 // ── Responsive ────────────────────────────────────────────────────────────────
 @media (max-width: 560px) {
   .stat-grid { grid-template-columns: 1fr 1fr; }
