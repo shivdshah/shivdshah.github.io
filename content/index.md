@@ -23,6 +23,7 @@ I'm interested in GTM systems, quantitative methods, and investing. This site ha
 
 ## Writing
 
+- [[writing/second-brain|Build a Second Brain]]: How I wired Claude into my actual work tools, packaged my recurring workflows as skills, and gave it a persistent memory of who I am.
 - [[writing/ipl-monopsony|Cricket's Missing Billion]]: The IPL's structural monopsony and the $281m per season that should flow to players.
 - [[writing/b2b-marketplace|What I learned scaling a B2B marketplace from zero to $50m GMV]]: On supply constraints, commercial hiring, and the limits of disintermediation.
 
