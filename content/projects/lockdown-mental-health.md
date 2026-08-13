@@ -51,7 +51,7 @@ Standard errors are clustered at the year-month of birth level, following Lee an
 
 ## Did the curfew actually keep people indoors?
 
-Before examining mental health, it is important to establish the curfew had its intended effect: reducing mobility. Three outcomes are measured: the number of days spent outside the previous week, whether the respondent reported being under the curfew, and whether they reported never going outside at all.
+Before examining mental health, the curfew needs to be shown to have had its intended effect: reducing mobility. Three outcomes are measured: the number of days spent outside the previous week, whether the respondent reported being under the curfew, and whether they reported never going outside at all.
 
 | Outcome | ±17 months | ±30 months | ±45 months | ±60 months |
 |---------|-----------|-----------|-----------|-----------|
@@ -166,4 +166,4 @@ The results paint a clear picture. Turkey's age-specific curfew during the COVID
 
 The heterogeneity analysis adds texture to the headline findings. The burden was not evenly distributed. Those living alone (widowed or separated), women, and those facing financial stress bore a disproportionate share of the mental health cost. Effective pandemic policy therefore requires not just mobility restrictions, but accompanying support structures targeted at the most vulnerable.
 
-More broadly, the study illustrates the value of natural experiments and quasi-experimental methods in economics. The causal question, does confinement damage mental health, cannot be answered with a simple survey comparison, because the people who are confined and those who are not differ in too many ways. The RD design, by exploiting the sharp age cutoff, allows for a credible causal answer where a naive analysis would mislead.
+More broadly, the RD design shows what quasi-experimental methods can do that a naive survey comparison cannot: turn a sharp, arbitrary cutoff into a credible causal answer to a question, does confinement damage mental health, that a simple comparison of confined and unconfined people would get wrong.

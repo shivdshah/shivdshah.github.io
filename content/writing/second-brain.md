@@ -18,7 +18,7 @@ Andrej Karpathy published a [gist in early 2025](https://gist.github.com/karpath
 
 His system has three parts. A raw folder where you dump unorganized source material: articles, transcripts, notes, anything. A wiki where the LLM compiles and maintains structured knowledge, building concept pages, entity pages, summaries, and a navigation index. A schema file that defines what the knowledge domain looks like and how the wiki should update itself.
 
-The insight isn't really about the technology. It's that AI is well-suited to the maintenance work that humans consistently abandon, and separating ingestion from structure means you can keep adding to the system without having to reorganize it.
+AI is well-suited to the maintenance work humans consistently abandon. Separating ingestion from structure means you can keep adding to the system without having to reorganize it.
 
 I read that and thought about what the same pattern would look like wired into real work tools, where the context already lives.
 
@@ -88,7 +88,7 @@ The compounding effect was the part I didn't expect. Every new skill makes the n
 
 **Keep it pruned.** This is the part of Karpathy's pattern people tend to underweight. A knowledge base that isn't maintained becomes a liability faster than you'd think. The consolidation routine is load-bearing.
 
-The shift that made everything else possible: I stopped using AI as a tool I opened when I needed help and started treating it as infrastructure I configured. The leverage comes from the assembly, not from any individual prompt.
+I stopped using AI as a tool I opened when I needed help and started treating it as infrastructure I configured. The leverage comes from the assembly, not any individual prompt.
 
 ## Honest caveats
 
@@ -98,4 +98,4 @@ Setup takes time. The first few skills are the hardest because you're figuring o
 
 The system is only as good as the data underneath it. A messy CRM produces a messy digest. Building this made the quality of my underlying data matter in a way it hadn't before.
 
-And it's shaped around one job, one set of tools, one set of repeated workflows. The components are general. The value comes from tailoring. A useful starting point for anyone thinking about this: identify the three things you do most often that are really just procedures, and write them down. That's where it starts.
+And it's shaped around one job, one set of tools, one set of repeated workflows. The components are general. The value comes from tailoring. Start by identifying the three things you do most often that are really just procedures, and write them down.

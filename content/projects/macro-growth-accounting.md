@@ -236,7 +236,7 @@ Capital also made a significant contribution, particularly in the 1960s and 1970
     <span class="result-label">Portugal: dominant growth driver</span>
     <span class="result-value">TFP</span>
   </div>
-  <p class="result-context">Productivity gains, rather than simply deploying more capital or labour, account for the largest single share of Portugal's GDP growth across the 70-year sample. This is the hallmark of a country successfully climbing the development ladder through technology adoption and institutional improvement.</p>
+  <p class="result-context">Productivity gains, rather than simply deploying more capital or labour, account for the largest single share of Portugal's GDP growth across the 70-year sample, consistent with a lower-income economy converging on its richer EU neighbours through technology adoption rather than raw input growth.</p>
 </div>
 
 ### Ethiopia: investment-driven acceleration

@@ -29,11 +29,11 @@ The junior generalists had the opposite problem. They moved fast and had no bad 
 
 What I'd look for now, with the benefit of hindsight, is the person in the middle. Someone junior enough to still be malleable, but who has spent enough time around the industry to have real credibility in the room. They're harder to find, but they're the ones who compound over time.
 
-## In a relationship-driven industry, cold outreach works, but not in the way you'd expect
+## Cold outreach built volume. Referrals built trust
 
 Our supply growth was almost entirely sales driven. Picking up the phones, cold emails, travelling to supplier sites and knocking on doors. Especially in markets where we had no critical mass, such as North Africa and Latin America, which turned out to be two of our strongest supply markets. Given the low conversion of direct sales, it only worked because of the volume of outreach we did.
 
-The pitch wasn't better pricing than other buyers. That was weak because relationships run deep and switching costs exist. We were selling growth. The ability to reach a global buyer network suppliers couldn't access before. Better payment terms. Cleaner logistics. A way to increase total throughput, not to optimise the margin on what they were already moving. That framing made a big difference.
+Better pricing than other buyers was a weak pitch, because relationships run deep and switching costs exist. We sold growth instead: the ability to reach a global buyer network suppliers couldn't access before. Better payment terms. Cleaner logistics. A way to increase total throughput, not to optimise the margin on what they were already moving. That framing made a big difference.
 
 Cold outreach alone didn't break the trust problem. These were often family businesses, some operating for multiple generations, so they were right to be suspicious of a new tech startup with no track record. We were the newcomers who, from their perspective, knew nothing.
 
@@ -47,7 +47,7 @@ For first-time transactions, we subsidised the supply side. By offering better p
 
 It made sense because our unit economics justified it. The LTV of our suppliers was large enough relative to our CAC to justify losing money on the first transaction. Once a supplier had been through a transaction with us and seen the ease of doing business, the logistics reliability, and the overall experience, they came back. Often, repeat buyers who liked the material would pay a premium, which gave us room to be competitive on price in subsequent transactions without subsidising them indefinitely.
 
-## Large AOV and high frequency aren't mutually exclusive in B2B, but monetising both is harder than it looks
+## Large AOV and high frequency can coexist in B2B. Monetising both is the hard part
 
 In consumer marketplaces, you generally have to choose between high AOV (e.g. real estate) or high frequency (e.g. ride-hailing). B2B marketplaces break this rule. At Safi, our buyers were large manufacturers needing material consistently and in volume. Once we'd established supplier-buyer relationships, transactions were large and recurring. The question was how to capture value without a take rate becoming a visible disincentive to use the platform.
 
@@ -63,10 +63,10 @@ We started using AI to chip away at this. On the logistics side, we built automa
 
 The more interesting application was in quality grading. Safi AI, our computer vision tool, assessed material composition and condition from images taken at a supplier's facility. This meant we weren't relying entirely on supplier self-reporting or doing costly manual inspections for every transaction. It wasn't perfect, but it meaningfully reduced the number of quality claims we faced.
 
-## The hardest thing: disrupting relationships you can't replace
+## Disrupting relationships you can't replace was the hardest part
 
 Every B2B marketplace is, at some level, trying to replace a phone call. Something I underestimated going into this was how much B2B purchasing is built on personal relationships. Buyers in the recyclables industry had been working with the same suppliers for years, sometimes decades. They knew the quality of their material, they had payment terms working for both sides, and they had a person to call when something went wrong. We were asking them to move those transactions onto a platform run by people they'd never met. That's not a small ask.
 
 The playbook most marketplaces follow is to try and disintermediate those relationships. Make the platform compelling enough buyers eventually route around their existing suppliers. I get the logic, but in practice it puts people on the defensive. You end up fighting the relationship rather than the inefficiency, which is a much harder battle.
 
-What I'd do differently is try to bring existing relationships onto the platform rather than compete with them. If a buyer already has three suppliers they trust, help them manage those relationships better: visibility on orders, payment tracking, quality records. Become the place where their whole supply operation lives, not an alternative channel. The B2B marketplaces growing fastest weren't trying to replace existing supplier relationships. They were trying to sit on top of them. The transactions come eventually.
+What I'd do differently is try to bring existing relationships onto the platform rather than compete with them. If a buyer already has three suppliers they trust, help them manage those relationships better: visibility on orders, payment tracking, quality records. Become the place where their whole supply operation lives, not an alternative channel. The B2B marketplaces growing fastest were trying to sit on top of existing supplier relationships, not replace them. The transactions come eventually.

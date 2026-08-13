@@ -69,7 +69,7 @@ where $T$ is the number of observations, $S$ is skewness, and $K$ is kurtosis. U
 
 ### Volatility clustering: calm and storm arrive in runs
 
-A second well-documented feature of financial returns is that periods of high volatility tend to cluster together: a turbulent day is more likely to be followed by another turbulent day than by a calm one, and vice versa. This means that, while tomorrow's return is unpredictable, tomorrow's *level of risk* is partially predictable from recent history. This is a key insight for risk management.
+A second well-documented feature of financial returns is that periods of high volatility tend to cluster together: a turbulent day is more likely to be followed by another turbulent day than by a calm one, and vice versa. This means that, while tomorrow's return is unpredictable, tomorrow's *level of risk* is partially predictable from recent history.
 
 Autocorrelation is the statistical tool used to detect this pattern. It measures how strongly a series is correlated with its own past values at different time lags. Plotting the autocorrelation of the raw returns shows little beyond noise. There is no consistent pattern to predict whether tomorrow's return will be positive or negative. Plotting the autocorrelation of the *squared* returns (a proxy for the magnitude of daily moves) tells a completely different story: large positive autocorrelations persist across many lags for all six stocks, particularly Mastercard. Squaring the returns captures the size of the move regardless of direction, so this pattern confirms that large moves, in either direction, tend to follow other large moves.
 
@@ -181,7 +181,7 @@ The backtesting period yielded 133 violations against an expected 122.75, giving
 
 A well-functioning VaR model should not only get the overall frequency of violations right. It should also ensure violations are *independent* of one another. If a loss breach today makes another breach tomorrow more likely, the model is failing to capture the persistence of volatility, and a firm relying on it faces consecutive bad days without adequate warning.
 
-The conditional coverage test checks whether violations cluster in time by modelling the sequence of violations as a Markov chain and testing whether the probability of a violation on a given day depends on whether one occurred the day before. The test finds no statistically significant evidence of clustering. Violations appear to be independent across time, which is a positive result for the model's reliability.
+The conditional coverage test checks whether violations cluster in time by modelling the sequence of violations as a Markov chain and testing whether the probability of a violation on a given day depends on whether one occurred the day before. The test finds no statistically significant evidence of clustering. Violations appear to be independent across time.
 
 ### Rolling-window re-estimation
 
